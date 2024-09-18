@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
+    'customers',
+    'orders',
+    'themes',
 ]
 
 MIDDLEWARE = [
@@ -73,7 +77,16 @@ WSGI_APPLICATION = 'mystore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mystoredb',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'USER' : 'mystoreuser',
+        'PASSWORD' : 'ren1234',
+    }
+}
 
 
 # Password validation
