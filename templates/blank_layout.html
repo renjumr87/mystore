@@ -15,15 +15,17 @@
 <body>
     
     {% comment %} Header Section {% endcomment %}
-    {% include 'header.html'%}
-    
-    {% comment %} Banner section {% endcomment %}
-    {% block banner %}
-    
-    {% endblock banner %}
+    <div class="header">
+        <div class="container">
+            {% include 'menu.html' %}         
+            {% block banner %}
+            {% endblock banner %}
 
+        </div> 
+    </div>
+    
     {% comment %} Content section {% endcomment %}
-    {% block content %}
+    {% block content %} 
     
     {% endblock content %}
 
