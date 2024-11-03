@@ -61,7 +61,7 @@ p{
 }
 .btn{
     display: inline-block;
-    background: #ff523b;
+    background: #d41900;
     color: white;
     padding: 8px 30px;
     margin: 30px 0;
@@ -72,7 +72,7 @@ p{
     background: #563434;
 }
 .header{
-    background: radial-gradient(#fff,#ffd6d6);
+    background: radial-gradient(#fff,#b37a7a);
 }
 .header .row{
     margin-top: 70px;
@@ -388,13 +388,29 @@ th:last-child{
 .form-container{
     background: #fff;
     width: 300px;
-    height: 400px;
+    height: 500px;
     position: relative;
     text-align: center;
     padding: 20px 0;
     margin: auto;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+}
+
+.message-container{
+    background: #fff;
+    width: 300px;
+    height: fit-content;
+    position: relative;
+    text-align: center;
+    padding: 20px 0;
+    margin: auto;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+}
+.error{
+    color: #d41900;
+}
+.success{
+    color: green;
 }
 .form-container span{
     font-weight: bold;
@@ -410,8 +426,9 @@ th:last-child{
 .form-container form{
     max-width: 300px;
     padding: 0 20px;
+    height: auto;
     position: absolute;
-    top: 130px;
+    top: 110px;
     transition: transform 1s;
 }
 form input{

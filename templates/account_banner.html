@@ -1,24 +1,4 @@
 {% load static %}
-
-<div class="container">
-    <div class="navbar">
-        <div class="logo">
-            <a href="{% url 'home' %}"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
-        </div>
-        <nav>
-        <ul id="MenuItems">
-            <li><a href="{% url 'home'%}">Home</a></li>
-            <li><a href="{% url 'list_products' %}">Products</a></li>
-            <li><a href="">About</a></li>
-            <li><a href="">Contact</a></li>
-            <li><a href="{% url 'account' %}">Account</a></li>
-        </ul>
-    </nav>
-        <a href="{% url 'cart' %}"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
-        <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
-    </div>
-</div>
-
 <!-- Account Page -->
 <div class="account-page">
     <div class="container">
@@ -27,24 +7,37 @@
                 <img src="{% static 'images/image1.png' %}" width="100%">
             </div>
             <div class="col-2">
+                {% comment %} {% if maessages %}
+                <div class="maessage-container">
+                    {% for maessage in messages %}
+                        <P class="{{ maessage.tags }}">{{ maessage }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %} {% endcomment %}
                 <div class="form-container">
                     <div class="form-btn">
                         <span onclick="login()">Login</span>
                         <span onclick="register()">Register</span>
                         <hr id="Indicator">
                     </div>
-                    <form id="LoginForm">
-                        <input type="text" placeholder="Username">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Login</button>
+                    <form id="LoginForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="username" required placeholder="Username">
+                        <input type="password" name="password" required placeholder="Password">
+                        <button type="submit" name="login" class="btn">Login</button>
                         <a href="">Forget Password</a>
                     </form>
 
-                    <form id="RegForm">
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
-                        <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Register</button>
+                    <form id="RegForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="text" name="firstname" required minlength="3" maxlength="50" placeholder="First Name">
+                        <input type="text" name="lastname" required minlength="3" maxlength="50" placeholder="Last Name">
+                        <input type="text" name="username" required minlength="3" maxlength="10" placeholder="Username">
+                        <input type="email" name="email" required placeholder="Email">
+                        <input type="password" name="password" required minlength="6" placeholder="Password">
+                        <input type="text" name="address"placeholder="Address">
+                        <input type="number" name="phone" required placeholder="Phone">
+                        <button type="submit" name="register" class="btn">Register</button>
                     </form>
                 </div>
             </div>

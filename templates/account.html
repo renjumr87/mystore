@@ -21,6 +21,16 @@
         LoginForm.style.transform = "translatex(300px)";
         Indicator.style.transform = "translate(0px)";
     }
+    {% comment %} Default Tab Check {% endcomment %}
     </script>
+    {% if register %}
+    <script>
+        register()
+    </script>
+    {% else %}
+    <script>
+        login()
+    </script>
+    {% endif %}
 {% endblock %}
 {% comment %} Toggle Form End {% endcomment %}
