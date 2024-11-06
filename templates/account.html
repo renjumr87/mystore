@@ -12,18 +12,23 @@
     var RegForm = document.getElementById("RegForm");
     var Indicator = document.getElementById("Indicator");
     function register() {
-        RegForm.style.transform = "translatex(0px)";
-        LoginForm.style.transform = "translatex(0px)";
+        RegForm.style.transform = "translateX(0px)";
+        LoginForm.style.transform = "translateX(0px)";
         Indicator.style.transform = "translateX(100px)";
     }
     function login() {
-        RegForm.style.transform = "translatex(300px)";
-        LoginForm.style.transform = "translatex(300px)";
-        Indicator.style.transform = "translate(0px)";
+        RegForm.style.transform = "translateX(300px)";
+        LoginForm.style.transform = "translateX(300px)";
+        Indicator.style.transform = "translateX(0px)";
     }
     {% comment %} Default Tab Check {% endcomment %}
-    </script>
     {% if register %}
+    document.addEventListener("DOMContentLoaded", register);
+    {% else %}
+    document.addEventListener("DOMContentLoaded", login);
+    {% endif %}
+    </script>
+    {% comment %} {% if register %}
     <script>
         register()
     </script>
@@ -31,6 +36,6 @@
     <script>
         login()
     </script>
-    {% endif %}
+    {% endif %} {% endcomment %}
 {% endblock %}
 {% comment %} Toggle Form End {% endcomment %}

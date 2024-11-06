@@ -7,13 +7,13 @@
                 <img src="{% static 'images/image1.png' %}" width="100%">
             </div>
             <div class="col-2">
-                {% comment %} {% if maessages %}
+                {% if maessages %}
                 <div class="maessage-container">
                     {% for maessage in messages %}
                         <P class="{{ maessage.tags }}">{{ maessage }}</p>
                     {% endfor %}
                 </div>
-                {% endif %} {% endcomment %}
+                {% endif %}
                 <div class="form-container">
                     <div class="form-btn">
                         <span onclick="login()">Login</span>
