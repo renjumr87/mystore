@@ -1,7 +1,10 @@
 {% load static %}
-
+{% load multiply %}
+{% load gettotal %}
+{% load gettax %}
+{% load get_grand_total %}
 <div class="small-container cart-page">
-    {% if cart %}
+    {% if cart and cart.added_items.all %}
     <table class="table-responsive">
         <tbody><tr>
             <th>Product</th>
@@ -16,14 +19,14 @@
                     <img src="{{ cart_item.product.image.url }}">
                     <div>
                         <p>{{ cart_item.product.title }}</p>
-                        <small>{{ cart_item.product.price }}</small>
+                        <small>Price : ${{ cart_item.product.price }}</small>
                         <br>
-                        <a href="">Remove</a>
+                        <a href="{% url 'remove_item' cart_item.id %}">Remove</a>
                     </div>
                 </div>
             </td>
             <td><input type="number" disabled value="{{ cart_item.quantity }}"></td>
-            <td>{{ cart_item.product.price }}</td>
+            <td>{% multiply cart_item.product.price  cart_item.quantity %}</td>
         </tr>
         {% endfor %}
     </tbody></table>
@@ -32,19 +35,23 @@
             <tbody>
                 <tr>
                     <td>Subtotal</td>
-                    <td>$200.00</td>
+                    <td>{% gettotal cart %}</td>
                 </tr>
                 <tr>
                     <td>Tax</td>
-                    <td>$35.00</td>
+                    <td>{% gettax cart %}</td>
                 </tr>
                 <tr>
-                    <td>Total</td>
-                    <td>$230.00</td>
+                    <td>Grand Total</td>
+                    <td>{% getgrandtotal cart %}</td>
                 </tr>
                 <tr>
                 <td colspan="2">
-                    <button class="btn">Confirm</button>
+                    <form method="POST" action="{% url 'checkout'%}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="=total" value="{% getgrandtotal cart %}">
+                        <button type="submit" class="btn">Checkout</button>
+                    </form>
                 </td>
                 </tr>
             </tbody>

@@ -3,5 +3,11 @@
 
 {% comment %} Content section {% endcomment %}
 {% block content %}
+{% if maessages %}
+    {% for maessage in messages %}
+        <P class="{{ maessage.tags }}">{{ maessage }}</p>
+    {% endfor %}
+{% else %}
 {% include 'cart_container.html' %}
+{% endif %}
 {% endblock content %}
