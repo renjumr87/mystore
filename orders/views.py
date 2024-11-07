@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from . models import Order, OrderedItem
 from django.contrib import messages
 from products.models import Product
 from customers.models import Customer
+from orders.models import Order
 
 # Add to Cart
+@login_required(login_url='account')
 def add_to_cart(request):
     if request.POST and request.user.is_authenticated:
         user = request.user
@@ -61,7 +64,7 @@ def checkout_cart(request):
             user = request.user
             customer = user.customer_profile
             total = float(request.POST.get('total'))
-            order_obj = Order.objects.get(
+            order_obj = Order.objects.filter(
                 owner = customer,
                 order_status = Order.CART_STAGE
             )
@@ -75,7 +78,16 @@ def checkout_cart(request):
                 status_message = "Unable to Process. Your cart is empty"
                 messages.error(request, status_message)
         except Exception as e:
-            status_message = "Unable to Process. Your cart is empty"
+            status_message = "An unexpected error occurred. Please try again."
             messages.error(request, status_message)
     return redirect('cart')
-# 
+
+# Order Status Check
+@login_required(login_url='account')
+def show_orders(request):
+        user = request.user
+        customer = user.customer_profile
+        # Customer related Filter
+        all_orders = Order.objects.filter(owner=customer).exclude(order_status=0)
+        context = {'orders': all_orders}
+        return render(request, 'orders.html', context)
